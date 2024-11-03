@@ -1,2 +1,4 @@
-Book.objects.get(title='1984').title="Nineteen Eighty-Four"
-Book.objects.get(title='Nineteen Eighty-Four').save()
+Update_book = Book.object.get(title = '1984')
+Update_book.title = "Nineteen Eighty-Four"
+
+Book.object.all()

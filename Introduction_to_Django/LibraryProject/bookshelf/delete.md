@@ -1,2 +1,3 @@
-Book.objects.get(id=1).delete()
-Book.objects.all()
+from bookshelf.models import Book
+
+Book.delete()

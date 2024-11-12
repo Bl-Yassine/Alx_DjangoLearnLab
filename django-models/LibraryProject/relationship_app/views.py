@@ -54,7 +54,14 @@ def member_view(request):
 #Update Views to Enforece Permissions
 from django.contrib.auth.decorators import permission_required
 
-@permission_required('book.can_add_book')
-def my_view(request):
+@permission_required('relationship_app.can_add_book')
+def add_book(request):
     pass
-    
+
+@permission_required('relationship_app.can_change_book')
+def change_book(request):
+    pass
+
+@permission_required('relationship_app.can_delete_book')
+def delete_bookw(request):
+    pass

@@ -51,3 +51,10 @@ def librarian_view(request):
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
 
+#Update Views to Enforece Permissions
+from django.contrib.auth.decorators import permission_required
+
+@permission_required('book.can_add_book')
+def my_view(request):
+    pass
+    

@@ -35,8 +35,10 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_choices = ['Admin','Librarian','Member']
-    role = models.CharField(max_length=100,choices= user_choices)
+    user_choices = [('Admin', 'Admin'),
+        ('Librarian', 'Librarian'),
+        ('Member', 'Member'),]
+    role = models.CharField(max_length=10,choices= user_choices)
 
     def __str__(self):
         return self.user

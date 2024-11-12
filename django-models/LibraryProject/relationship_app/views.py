@@ -29,7 +29,7 @@ def register(request):
 
 from django.contrib.auth.decorators import user_passes_test
 from .models import UserProfile
-
+# Role check functions
 def is_admin(user):
     return user.UserProfile.role == 'Admin'
 
@@ -39,7 +39,7 @@ def is_librarian(user):
 def is_member(user):
     return user.UserProfile.role == 'Member'
 
-# 2. Define views with role-based access
+#  Define views with role-based access
 
 @user_passes_test(is_admin)
 def admin_view(request):

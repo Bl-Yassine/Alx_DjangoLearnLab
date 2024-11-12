@@ -1,8 +1,2 @@
-# Creating the instance
-Book.objects.create
-
-python command:
-book = Book(title="1984", author="George Orwell", publication_year=1949)
-book.save()
-# Expected Output:
-No output if successful.
+new_book = Book.objects.create(title='1984', author='George Orwell', published_date='1949')
+new_book.save()

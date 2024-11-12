@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vl%v^t1ch6@v(8820u^i&e=02e^8oggtcwm(4^cqk+de)mqeeu'
+SECRET_KEY = 'django-insecure-#ig6!=q=2#mf_l*(=&vg%#-lsh1*93mi6_jp%2q2z--i6&oynm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bookshelf',
     'relationship_app'
+    'bookshelf'
 ]
 
 MIDDLEWARE = [
@@ -123,7 +123,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGIN_REDIRECT_URL = 'list_books'  # Adjust according to your desired redirect after login
-LOGOUT_REDIRECT_URL = 'login'      # Redirect to login page after logout
-

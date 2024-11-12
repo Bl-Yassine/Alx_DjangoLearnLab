@@ -1,2 +1,1 @@
-Set up the Django file structure.
-
+Introduction to Django Development Environment Setup

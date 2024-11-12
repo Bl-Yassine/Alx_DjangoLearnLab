@@ -1,9 +1,4 @@
-# Updating the title
+Update_book = Book.object.get(title = '1984')
+Update_book.title = "Nineteen Eighty-Four"
 
-python command:
-
-retrieved_book.title = "Nineteen Eighty-Four"
-retrieved_book.save()
-
-# Expected Output:
-No output if successful.
+Book.object.all()

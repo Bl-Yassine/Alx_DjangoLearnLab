@@ -31,13 +31,13 @@ from django.contrib.auth.decorators import user_passes_test
 from .models import UserProfile
 
 def is_admin(user):
-    return user.is_authenticated and hasattr(user, 'UserProfile') and user.UserProfile.role == 'Admin'
+    return user.UserProfile.role == 'Admin'
 
 def is_librarian(user):
-    return user.is_authenticated and hasattr(user, 'UserProfile') and user.UserProfile.role == 'Librarian'
+    return  user.UserProfile.role == 'Librarian'
 
 def is_member(user):
-    return user.is_authenticated and hasattr(user, 'UserProfile') and user.UserProfile.role == 'Member'
+    return user.UserProfile.role == 'Member'
 
 # 2. Define views with role-based access
 

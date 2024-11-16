@@ -10,7 +10,7 @@ class Book(models.Model):
 #Set Up the costom User model
 from django.contrib.auth.models import AbstractUser
 
-class CostumUser(AbstractUser):
+class CustomUser(AbstractUser):
     date_of_birth = models.DateField()
     profile_photo = models.ImageField()
     

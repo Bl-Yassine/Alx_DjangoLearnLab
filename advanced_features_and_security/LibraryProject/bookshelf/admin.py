@@ -9,3 +9,7 @@ class BookAdmin(admin.ModelAdmin):
     list_filter=('title','author','publication_year')
 
 admin.site.register(Book , BookAdmin)
+
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+admin.site.register(CustomUser, CustomUserAdmin)

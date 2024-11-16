@@ -19,7 +19,11 @@ class CustomUser(AbstractUser):
 
 from django.contrib.auth.models import BaseUserManager
 
+<<<<<<< HEAD
 class CustomUSerManager(BaseUserManager):
+=======
+class CustomUserManager(BaseUserManager):
+>>>>>>> fe529f606d687e54fd174d8de190999e691d82f6
     
     def create_user(self, email, password=None, **extra_fields):
         #create and return a regular user with an email and password

@@ -20,7 +20,10 @@ class User(AbstractUser):
     last_name = models.CharField(_('Last Name of User'), blank = True, max_length = 20)
     class Meta:
         permission =(
-            ('can_create','can_delete',"can_edit",'can_view')
+             ('can_view', ' can view'),
+            ('can_create', ' can create'),
+            ('can_edit', ' can edit'),
+            ('can_delete', ' can delete')
         )
 
 # Create User Manage for Custom User Model

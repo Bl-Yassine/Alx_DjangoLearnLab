@@ -13,6 +13,11 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField()
     profile_photo = models.ImageField()
+    class Meta:
+        permission =(
+            ('can_create','can_delete',"can_edit",'can_view')
+        )
+    
 
 
 # Create User Manage for Custom User Model
@@ -41,4 +46,6 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, password = None , **extra_fields):
         extra_fields.setdefault('is_user',True)
         extra_fields.setdefault('is_superuser',True)
-        return self.create_user(email,password, **extra_fields)   
+        return self.create_user(email,password, **extra_fields)
+    
+

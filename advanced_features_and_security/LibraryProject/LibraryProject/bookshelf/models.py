@@ -14,9 +14,12 @@ class CustomUser(AbstractUser):
     date_of_birth = models.DateField()
     profile_photo = models.ImageField()
     class Meta:
-        permission =(
-             ("can_create", "can_delete","can_edit","can_view")
-        )
+        permissions = (
+            ("can_create", "Can create items"),
+            ("can_delete", "Can delete items"),
+            ("can_edit", "Can edit items"),
+            ("can_view", "Can view items"),
+)
     
 
 

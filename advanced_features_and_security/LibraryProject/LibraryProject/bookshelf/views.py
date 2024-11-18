@@ -4,14 +4,14 @@ from django.shortcuts import render
 #Create groupe 
 from django.contrib.auth.models import Group , Permission
 from django.contrib.contenttypes.models import ContentType
-from .models import User
+from .models import CustomUser
 
 Editors, created = Group.objects.get_or_create(name='Editors')
 Viewers, created = Group.objects.get_or_create(name='Viewers')
 Admins, created = Group.objects.get_or_create(name='Admins')
 
 
-ct = ContentType.objects.get_for_model(User)
+ct = ContentType.objects.get_for_model(CustomUser)
 
 can_view = Permission.objects.create(name='can_view')
 can_create = Permission.objects.create(name='can_create')

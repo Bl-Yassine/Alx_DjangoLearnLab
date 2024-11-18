@@ -13,11 +13,6 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField()
     profile_photo = models.ImageField()
-    
-    
-class User(AbstractUser):
-    first_name = models.CharField(_('First Name of User'), blank = True, max_length = 20)
-    last_name = models.CharField(_('Last Name of User'), blank = True, max_length = 20)
     class Meta:
         permission =(
              ('can_view', ' can view'),
@@ -25,6 +20,8 @@ class User(AbstractUser):
             ('can_edit', ' can edit'),
             ('can_delete', ' can delete')
         )
+    
+
 
 # Create User Manage for Custom User Model
 

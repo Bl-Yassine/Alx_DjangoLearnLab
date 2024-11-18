@@ -5,6 +5,13 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     publication_year = models.DateField()
+    class Meta:
+        permissions = (
+            ("can_create", "Can create items"),
+            ("can_delete", "Can delete items"),
+            ("can_edit", "Can edit items"),
+            ("can_view", "Can view items"),
+        )
 
 
 #Set Up the costom User model
@@ -13,13 +20,6 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField()
     profile_photo = models.ImageField()
-    class Meta:
-        permissions = (
-            ("can_create", "Can create items"),
-            ("can_delete", "Can delete items"),
-            ("can_edit", "Can edit items"),
-            ("can_view", "Can view items"),
-)
     
 
 

@@ -15,10 +15,7 @@ class CustomUser(AbstractUser):
     profile_photo = models.ImageField()
     class Meta:
         permission =(
-             ('can_view', ' can view'),
-            ('can_create', ' can create'),
-            ('can_edit', ' can edit'),
-            ('can_delete', ' can delete')
+             ("can_create", "can_delete","can_edit","can_view")
         )
     
 

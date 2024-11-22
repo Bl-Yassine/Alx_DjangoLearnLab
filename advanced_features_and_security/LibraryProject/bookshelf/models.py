@@ -5,6 +5,13 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     publication_year = models.DateField()
+    class Meta:
+        permissions = (
+            ("can_create", "Can create items"),
+            ("can_delete", "Can delete items"),
+            ("can_edit", "Can edit items"),
+            ("can_view", "Can view items"),
+        )
 
 
 #Set Up the costom User model
@@ -13,17 +20,14 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField()
     profile_photo = models.ImageField()
+    
 
 
 # Create User Manage for Custom User Model
 
 from django.contrib.auth.models import BaseUserManager
 
-<<<<<<< HEAD
-class CustomUSerManager(BaseUserManager):
-=======
 class CustomUserManager(BaseUserManager):
->>>>>>> fe529f606d687e54fd174d8de190999e691d82f6
     
     def create_user(self, email, password=None, **extra_fields):
         #create and return a regular user with an email and password
@@ -42,5 +46,6 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, password = None , **extra_fields):
         extra_fields.setdefault('is_user',True)
         extra_fields.setdefault('is_superuser',True)
+        return self.create_user(email,password, **extra_fields)
+    
 
-        return self.create_user(email,password, **extra_fields)   

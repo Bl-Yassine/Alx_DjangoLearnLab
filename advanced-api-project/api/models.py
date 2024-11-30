@@ -8,6 +8,8 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+    
+    
 from django.core.exceptions import ValidationError    
 def validate_year_not_in_future(value):
     current_year = now().year

@@ -17,7 +17,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 #Set Up Generic Views
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 @api_view(['GET'])
 def apiOverview(request):
@@ -35,6 +36,10 @@ def apiOverview(request):
 def ListView(request):
     books = Book.objects.all()
     serializer = BookSerializer(books , many=True)
+    filter_backend = [DjangoFilterBackend, filters.SearchFilter , filters.OrderingFilter ] #filter, search , ordoring
+    filterset_fields = ['title','publication_year','author'] #filter
+    search_fields = ['title','publication_year','author'] #search
+    ordering_fields = ['title','publication_year','author'] #Ordering
     return Response(serializer.data)
 
 #DetailView 

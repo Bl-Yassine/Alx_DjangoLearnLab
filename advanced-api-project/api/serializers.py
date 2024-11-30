@@ -15,6 +15,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 #Create AuthorSerializer
 class AuthorSerializers(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Author
         fields = ['name'] #name field

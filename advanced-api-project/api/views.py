@@ -17,6 +17,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 #Set Up Generic Views
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django_filters import rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 

@@ -14,7 +14,7 @@ class BookSerializer(serializers.ModelSerializer):
         return publication_year
 
 #Create AuthorSerializer
-class AuthorSerializers(serializers.ModelSerializer):
+class AuthorSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Author

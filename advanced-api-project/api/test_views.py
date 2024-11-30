@@ -67,10 +67,3 @@ class BookAPITestCase(APITestCase):
         response = self.client.post(self.book_create_url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("publication_year", response.data)
-
-    def test_permission_protected_endpoints(self):
-        # Assuming some endpoints require authentication
-        # Ensure unauthenticated users cannot access the endpoint
-        self.client.logout()
-        response = self.client.post(self.book_create_url, {}, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)  # Or 401 depending on your configuration

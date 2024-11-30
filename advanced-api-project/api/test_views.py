@@ -1,10 +1,15 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
+from django.contrib.auth.models import User
 from your_app.models import Book, Author
 
 class BookAPITestCase(APITestCase):
     def setUp(self):
+        # Set up a test user for authentication
+        self.user = User.objects.create_user(username="testuser", password="testpassword")
+        self.client.login(username="testuser", password="testpassword")
+
         # Set up initial data for the tests
         self.author = Author.objects.create(name="John Doe")
         self.book = Book.objects.create(
@@ -67,3 +72,16 @@ class BookAPITestCase(APITestCase):
         response = self.client.post(self.book_create_url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("publication_year", response.data)
+
+    def test_permission_denied_for_unauthenticated_user(self):
+        # Log out to simulate an unauthenticated user
+        self.client.logout()
+
+        # Attempt to create a book
+        data = {
+            "title": "Unauthorized Book",
+            "publication_year": 2022,
+            "author": self.author.id
+        }
+        response = self.client.post(self.book_create_url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)  # Adjust to 401 if that's your config

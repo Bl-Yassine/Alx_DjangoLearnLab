@@ -4,15 +4,18 @@ from django.shortcuts import render
 
 #ListView for retrieving all books.
 from rest_framework import generics
-from .models import Book
-from .serializers import BookSerializer
+from .models import Book ,Author
+from .serializers import BookSerializer ,AuthorSerializer
 
-class CustomBookListView(generics.ListAPIView):
-    model = Book
+#Book Views
+
+class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-
+class AuthorListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
 
 
 

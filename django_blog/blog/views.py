@@ -14,4 +14,4 @@ def registeruser(request):
     if form.is_valid():
         form.save()
         return redirect('login')
-    return render (request,'auth/register.html',{'form':form })
+    return render (request,'blog/register.html',{'form':form })

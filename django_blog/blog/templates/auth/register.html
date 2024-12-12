@@ -1,7 +1,23 @@
-{% block title %}Sign Up{% endblock %} {% block content %}
-<h2>Register</h2>
-<form method="post">
-    {% csrf_token %} {{ form }}
-    <button type="submit">Register</button>
-</form>
-{% endblock %}
+<!-- base.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sign Up{% endblock %} {% block content %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Content -->
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %} {{ form }}
+        <button type="submit">Register</button>
+    </form>
+    {% endblock %}
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
+
+
+

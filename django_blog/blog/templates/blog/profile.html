@@ -14,6 +14,7 @@
     <p>firstname : {{ user.first_name }}!</p>
     <p>last name :{{ user.last_name }}!</p>
     <p>lEmail :{{ user.email }}!</p>
+    <a href="{% url 'edit'%}">Edit Profile</a>
     {% else %}
     <p>Hello, Guest!</p>
     {% endif %}

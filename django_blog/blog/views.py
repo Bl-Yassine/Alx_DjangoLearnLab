@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm , EditUserForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 
@@ -28,3 +28,12 @@ def profileinfo(request):
         'user': current_user,
     }
     return render (request , 'blog/profile.html',context)
+
+@login_required
+def editProfile(request):
+    form = EditUserForm(request.POST , instance = request.user)
+    if form.is_valid():
+        form.save()
+        return redirect('login')
+    return render (request,'blog/edit_profile.html',{'form':form })
+    

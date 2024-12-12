@@ -1,0 +1,22 @@
+{% load static %}
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Content -->
+    {% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}!</p>
+    <p>firstname : {{ user.first_name }}!</p>
+    <p>last name :{{ user.last_name }}!</p>
+    <p>lEmail :{{ user.email }}!</p>
+    {% else %}
+    <p>Hello, Guest!</p>
+    {% endif %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

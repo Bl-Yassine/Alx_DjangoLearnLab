@@ -8,10 +8,23 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import RegisterUserForm
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
+
+def basepage(request):
+    return render (request, 'blog/base.html')
 
 def registeruser(request):
-    form = UserCreationForm(request.POST)
+    form = RegisterUserForm(request.POST)
     if form.is_valid():
         form.save()
         return redirect('login')
     return render (request,'blog/register.html',{'form':form })
+
+from django.contrib.auth.decorators import login_required
+@login_required
+def profileinfo(request):
+    current_user = request.user
+    context = {
+        'user': current_user,
+    }
+    return render (request , 'blog/profile.html',context)

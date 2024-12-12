@@ -7,8 +7,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import RegisterUserForm
+from django.shortcuts import redirect
 
-class RegisterUser(CreateView):
-    form_class = RegisterUserForm
-    success_url = reverse_lazy('login')
-    template_name = 'auth/register.html'
+def registeruser(request):
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('login')
+    return render (request,'auth/register.html',{'form':form })

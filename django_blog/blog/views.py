@@ -31,9 +31,10 @@ def profileinfo(request):
 
 @login_required
 def editProfile(request):
-    form = EditUserForm(request.POST , instance = request.user)
-    if form.is_valid():
-        form.save()
-        return redirect('login')
+    if request.method == "POST":
+        form = EditUserForm(request.POST , instance = request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
     return render (request,'blog/edit_profile.html',{'form':form })
     

@@ -74,7 +74,7 @@ class PostCreateView(LoginRequiredMixin , CreateView):
 class PostUpdateView(LoginRequiredMixin , UpdateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/postcreate.html'
+    template_name = 'blog/postedit.html'
     success_url = reverse_lazy('posts')
 
 

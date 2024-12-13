@@ -3,15 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 
 #User Registration
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
+
 from .forms import RegisterUserForm , EditUserForm
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
 
 def basepage(request):
-    return render (request, 'blog/base.html')
+    return render (request, 'blog/base.html',)
 
 def registeruser(request):
     form = RegisterUserForm(request.POST)
@@ -37,4 +34,52 @@ def editProfile(request):
             form.save()
             return redirect('profile')
     return render (request,'blog/edit_profile.html',{'form':form })
+
+
+#Create Djnago Views for each CRUD Operation
+from django.views.generic import ListView, DetailView , CreateView, UpdateView, DetailView , DeleteView
+from django.urls import reverse_lazy
+from .models import Post
+from .forms import PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin 
+
+#ListView
+class PostListiView(LoginRequiredMixin , ListView):
+    model = Post
+    template_name = 'blog/postlist.html'
+    context_object_name ='posts'
+
+#DetailView
+class PostDetailView(LoginRequiredMixin , DetailView):
+    model = Post
+    template_name = 'blog/postdetail.html'
     
+
+
+#CreateView
+class PostCreateView(LoginRequiredMixin , CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/postcreate.html'
+    success_url = reverse_lazy('posts')
+
+    def form_valid(self, form):
+        post = form.save(commit=False)  
+        post.author = self.request.user 
+        post.save()              
+        return super().form_valid(form)
+
+
+#UpdateView
+class PostUpdateView(LoginRequiredMixin , UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/postcreate.html'
+    success_url = reverse_lazy('posts')
+
+
+#DeleteView
+class PostDeleteView(LoginRequiredMixin , DeleteView):
+    model = Post
+    template_name = 'blog/postdelete.html'
+    success_url = reverse_lazy('posts')

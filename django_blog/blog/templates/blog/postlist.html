@@ -1,0 +1,19 @@
+
+{% block content %}
+
+    <h1>Your Posts</h1>
+    <a href="{% url 'postcreate' %}">Add post</a>
+      {% for post in posts %}
+      <div>
+        <div>
+          <h5>{{ post.title }}</h5>
+          <p>{{ post.content}}</p>
+          <p>{{ post.published_date}}</p>
+          <p>{{ post.author}}</p>
+        </div>
+      </div>
+        {% empty %}
+          <h3>No post yet.</h3>
+          <a href="{% url 'postcreate' %}">Add post</a>
+      {% endfor %}
+{% endblock %}

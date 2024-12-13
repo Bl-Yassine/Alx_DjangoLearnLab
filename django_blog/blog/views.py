@@ -46,19 +46,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 #ListView
 class PostListiView(LoginRequiredMixin , ListView):
     model = Post
-    template_name = 'blog/postlist.html'
+    template_name = 'blog/post_list.html'
     context_object_name ='posts'
 
 #DetailView
 class PostDetailView(LoginRequiredMixin , DetailView):
     model = Post
-    template_name = 'blog/postdetail.html'
+    template_name = 'blog/post_detail.html'
 
 #CreateView
 class PostCreateView(LoginRequiredMixin , CreateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/postcreate.html'
+    template_name = 'blog/post_create.html'
     success_url = reverse_lazy('posts')
 
     def form_valid(self, form):
@@ -72,7 +72,7 @@ class PostCreateView(LoginRequiredMixin , CreateView):
 class PostUpdateView(LoginRequiredMixin ,UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/postedit.html'
+    template_name = 'blog/post_edit.html'
     success_url = reverse_lazy('posts')
 
     def test_func(self):
@@ -83,7 +83,7 @@ class PostUpdateView(LoginRequiredMixin ,UserPassesTestMixin, UpdateView):
 #DeleteView
 class PostDeleteView(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
     model = Post
-    template_name = 'blog/postdelete.html'
+    template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('posts')
 
     def test_func(self):

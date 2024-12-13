@@ -20,8 +20,8 @@ class EditUserForm(UserChangeForm):
         fields = ('username','first_name', 'last_name', 'email' , 'password')
 
 
-from .models import Post
-from django.utils.timezone import now 
+from .models import Post , Comment
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -30,3 +30,9 @@ class PostForm(forms.ModelForm):
             'title' : forms.TextInput(attrs={'class' : 'form-control'}),
             'content' : forms.Textarea(attrs={'class':'form-control'})
             }
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fieds = ['content']
+        widgets = {'content' : forms.Textarea(attrs={'class':'form-control'})}

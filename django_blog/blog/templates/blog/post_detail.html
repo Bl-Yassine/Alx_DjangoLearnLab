@@ -1,7 +1,19 @@
 {% load static %}
 <h1>{{ post.title }}</h1>
 <p>{{ post.content }}</p>
-<p>{{ task.published_date }}</p>
-<p>{{ task.author }}</p>
+<p>{{ post.published_date }}</p>
+<p>{{ post.author }}</p>
+
+{% for comment in comments %}
+      <div>
+        <div>
+          <li><a href="{% url 'commentdetail' post.pk %}">edith comment</a>{{comment.content}}</li>
+        </div>
+      </div>
+        {% empty %}
+          <h3>No post yet.</h3>
+          <a href="{% url 'commentcreate' %}">Add comment</a>
+{% endfor %}
+
 <a href="{% url 'postupdate' post.pk %}">Edit post</a>
 <a href="{% url 'postdelete' post.pk %}">Delete post</a>

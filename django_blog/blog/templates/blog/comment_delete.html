@@ -1,0 +1,10 @@
+{% load static %}
+{% block content %}
+  <h1>Confirm Delete</h1>
+  <p>Are you sure you want to delete the comment : {{comment.content}}?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+    <a href="{% url 'posts' %}">Cancel</a>
+  </form>
+{% endblock %}

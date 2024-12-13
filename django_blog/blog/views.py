@@ -39,8 +39,8 @@ def editProfile(request):
 #Create Djnago Views for each CRUD Operation
 from django.views.generic import ListView, DetailView , CreateView, UpdateView, DetailView , DeleteView
 from django.urls import reverse_lazy
-from .models import Post
-from .forms import PostForm
+from .models import Post , Comment
+from .forms import PostForm , CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 
 #ListView
@@ -84,6 +84,57 @@ class PostUpdateView(LoginRequiredMixin ,UserPassesTestMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
+    success_url = reverse_lazy('posts')
+
+    def test_func(self):
+        post = self.get_object()  
+        return post.author == self.request.user
+    
+
+
+#ListView Comment
+class CommentListiView(LoginRequiredMixin , ListView):
+    model = Comment
+    template_name = 'blog/comment_list.html'
+    context_object_name ='comments'
+
+#DetailView Comment
+class CommentDetailView(LoginRequiredMixin , DetailView):
+    model = Comment
+    template_name = 'blog/comment_detail.html'
+    context_object_name ='comments'
+
+
+
+#CreateView Comment
+class CommentCreateView(LoginRequiredMixin , CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comment_create.html'
+    success_url = reverse_lazy('posts')
+
+    def form_valid(self, form):
+        post = form.save(commit=False)  
+        post.author = self.request.user 
+        post.save()              
+        return super().form_valid(form)
+    
+
+#UpdateView Comment
+class CommentUpdateView(LoginRequiredMixin ,UserPassesTestMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comment_edit.html'
+    success_url = reverse_lazy('posts')
+    def test_func(self):
+        post = self.get_object()  
+        return post.author == self.request.user
+    
+
+#DeleteView
+class CommentDeleteView(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
+    model = Comment
+    template_name = 'blog/comment_delete.html'
     success_url = reverse_lazy('posts')
 
     def test_func(self):

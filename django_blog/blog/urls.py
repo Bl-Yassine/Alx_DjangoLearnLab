@@ -13,10 +13,10 @@ urlpatterns = [
     path('post/<int:pk>/',views.PostDetailView.as_view(),name='postdetail'),
     path('post/<int:pk>/update/',views.PostUpdateView.as_view(),name='postupdate'),
     path('post/<int:pk>/delete/',views.PostDeleteView.as_view(),name='postdelete'),
-    path('post/<int:pk>/comment/',views.CommentListiView.as_view(),name='postandcomment'), #Comment List View
-    path('post/<int:pk>/comment/<int:pk>/',views.CommentDetailView.as_view(),name='Commentdetai'), # Comment Detail View
-    path('post/<int:pk>/comment/new/',views.CommentCreateView.as_view(),name='CreateComment'), # Comment Create View
-    path('post/<int:pk>/comment/<int:pk>/update/',views.CommentUpdateView.as_view(),name='updateComment'), # Comment Update View
-    path('post/<int:pk>/comment/<int:pk>/Delete/',views.PostDeleteView.as_view(),name='updateComment'), # Comment Delete View
+    path('post/<int:pk>/comments/',views.CommentListiView.as_view(),name='postandcomment'), #Comment List View
+    path('post/<int:pk>/comments/<int:pk>/',views.CommentDetailView.as_view(),name='Commentdetai'), # Comment Detail View
+    path('post/<int:pk>/comments/new/',views.CommentCreateView.as_view(),name='CreateComment'), # Comment Create View
+    path('post/<int:pk>/comments/<int:pk>/update/',views.CommentUpdateView.as_view(),name='updateComment'), # Comment Update View
+    path('post/<int:pk>/comments/<int:pk>/Delete/',views.PostDeleteView.as_view(),name='updateComment'), # Comment Delete View
 
 ]

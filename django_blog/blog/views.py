@@ -151,3 +151,11 @@ class CommentDeleteView(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
     def test_func(self):
         post = self.get_object()  
         return post.author == self.request.user
+    
+
+from django.shortcuts import render
+from .models import Post
+
+def posts_by_tag(request, tag_name):
+    posts = Post.objects.filter(post_tag__icontains=tag_name)
+    return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag_name})

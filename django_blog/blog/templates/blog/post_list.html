@@ -20,4 +20,8 @@
           <h3>No post yet.</h3>
           <a href="{% url 'postcreate' %}">Add post</a>
       {% endfor %}
+      <form method="get" action="{% url 'post_search' %}">
+        <input type="text" name="q" placeholder="Search posts..." class="form-control">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
 {% endblock %}

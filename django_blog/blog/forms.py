@@ -25,14 +25,15 @@ from .models import Post , Comment
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title' , 'content' ]
+        fields = ['title' , 'content' ,'post_tag']
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'content' : forms.Textarea(attrs={'class':'form-control'})
+            'content' : forms.Textarea(attrs={'class':'form-control'}),
+            'post_tag' : forms.Textarea(attrs={'class':'form-control'}),
             }
         
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fieds = ['content']
+        fields = ['content'] 
         widgets = {'content' : forms.Textarea(attrs={'class':'form-control'})}

@@ -1,22 +1,39 @@
-#Creating a Registration Serializer
 from rest_framework import serializers
-from .models import CustomUser
+from django.contrib.auth import get_user_model
+from django.contrib.auth.password_validation import validate_password
+from rest_framework.authtoken.models import Token
 
-class UserRegistationSerializers(serializers.ModelSerializer):
+User = get_user_model()
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    email = serializers.CharField()
+    username = serializers.CharField()
+    password = serializers.CharField(
+        write_only=True,
+        style={'input_type': 'password'},
+        validators=[validate_password]
+    )
+    password2 = serializers.CharField(
+        write_only=True,
+        style={'input_type': 'password'}
+    )
+
     class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password', 'bio', 'profile_picture']
-        extra_kwargs = {'password': {'write_only': True}}
+        model = User
+        fields = ('username', 'email', 'password', 'password2', 'first_name', 'last_name', 'bio')
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password": "Password fields didn't match."})
+        return attrs
 
     def create(self, validated_data):
-        user = CustomUser(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            bio=validated_data.get('bio', ''),
-            profile_picture=validated_data.get('profile_picture', None),
-        )
-        user.set_password(validated_data['password'])
+        validated_data.pop('password2')
+        password = validated_data.pop('password')
+        user = get_user_model().objects.create_user(**validated_data, password=password)
+        user.set_password(password)
         user.save()
+        Token.objects.create(user=user)
         return user
 
 class UserSerializer(serializers.ModelSerializer):
@@ -25,7 +42,7 @@ class UserSerializer(serializers.ModelSerializer):
     is_following = serializers.SerializerMethodField()
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['id', 'username', 'email', 'bio', 'profile_picture', 
                  'followers_count', 'following_count', 'is_following',
                  'created_at', 'updated_at']
@@ -36,12 +53,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_following_count(self, obj):
         return obj.following.count()
-
-    def get_is_following(self, obj):
-        request = self.context.get('request')
-        if request and request.user.is_authenticated:
-            return request.user.is_following(obj)
-        return False
 
     def get_is_following(self, obj):
         request = self.context.get('request')

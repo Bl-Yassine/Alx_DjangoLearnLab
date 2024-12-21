@@ -20,8 +20,8 @@ class Comment(models.Model):
     post = models.ForeignKey(Post , on_delete=models.CASCADE)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     content = models.TextField()
-    created_at = models.DateField(auto_now=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 

@@ -7,11 +7,11 @@ from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from .serializers import UserRegistrationSerializer, UserSerializer
 from rest_framework.decorators import action
-
+from .models import CustomUser
 User = get_user_model()
 
 class RegisterView(generics.GenericAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserRegistrationSerializer
     permission_classes = (permissions.AllowAny,)
 
